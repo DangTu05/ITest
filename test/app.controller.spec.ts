@@ -1,12 +1,20 @@
+// ...existing code...
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppController } from '../src/app.controller';
+import { AppService } from '../src/app.service';
 
 describe('AppController', () => {
   let appController: AppController;
 
   beforeEach(async () => {
     const app: TestingModule = await Test.createTestingModule({
-      controllers: [AppController]
+      controllers: [AppController],
+      providers: [
+        {
+          provide: AppService,
+          useValue: { getHello: () => 'Hello World!' }
+        }
+      ]
     }).compile();
 
     appController = app.get<AppController>(AppController);
@@ -18,3 +26,4 @@ describe('AppController', () => {
     });
   });
 });
+// ...existing code...
